@@ -5,6 +5,7 @@ Synopsis:    A front-end to multiplayer games
 Authors:     Vivien Kraus
 License:     LGPL-2.1 with OCaml linking exception
 Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+OCamlVersion: >= 3.12.1
 
 Library libjeu
   Path: serveur_jeu

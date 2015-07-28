@@ -197,7 +197,7 @@ let traiter_requete mdp_admin sockaddr_backend lignes_requete =
       | None ->
         Lwt.return None
       | Some ligne ->
-        Lwt.return (Some (Bytes.trim ligne)))
+        Lwt.return (Some ligne))
   in
   let travailler () =
     let open Lwt in
