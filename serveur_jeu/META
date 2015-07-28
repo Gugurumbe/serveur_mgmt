@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 44235b6e6ad86de4fb71c5f5deb2971c)
+version = "0.0"
+description = "A front-end to multiplayer games"
+requires = "lwt unix lwt.unix libjeu"
+archive(byte) = "libjeu.cma"
+archive(byte, plugin) = "libjeu.cma"
+archive(native) = "libjeu.cmxa"
+archive(native, plugin) = "libjeu.cmxs"
+exists_if = "libjeu.cma"
+# OASIS_STOP
+

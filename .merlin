@@ -1,0 +1,7 @@
+S serveur_jeu/
+B _build/serveur_jeu/
+S serveur_mgmt/
+B _build/serveur_mgmt/
+PKG lwt
+PKG lwt.unix
+PKG unix

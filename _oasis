@@ -1,0 +1,64 @@
+OASISFormat: 0.4
+Name:        game-mgmt
+Version:     0.0
+Synopsis:    A front-end to multiplayer games
+Authors:     Vivien Kraus
+License:     LGPL-2.1 with OCaml linking exception
+Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+
+Library libjeu
+  Path: serveur_jeu
+  BuildTools: ocamlbuild
+  InternalModules:
+    Jeu_jeu, Async_jeu
+  Modules:
+    Protocole_jeu, Requetes_jeu
+  BuildDepends:
+    lwt,
+    unix,
+    lwt.unix,
+    libjeu
+
+Library libmgmt
+  Path: serveur_mgmt
+  BuildTools: ocamlbuild
+  InternalModules:
+    Async_mgmt
+  Modules:
+    Protocole_mgmt, Requetes_mgmt
+  BuildDepends:
+    lwt,
+    unix,
+    lwt.unix,
+    libjeu
+
+Executable serveur_jeu
+  Path:
+    serveur_jeu
+  BuildTools:
+    ocamlbuild
+  MainIs:
+    serveur_jeu.ml
+  CompiledObject:
+    best
+  BuildDepends:
+    lwt,
+    unix,
+    lwt.unix,
+    libjeu
+
+Executable serveur_mgmt
+  Path:
+    serveur_mgmt
+  BuildTools:
+    ocamlbuild
+  MainIs:
+    serveur_mgmt.ml
+  CompiledObject:
+    best
+  BuildDepends:
+    lwt,
+    unix,
+    lwt.unix,
+    libmgmt
+  

@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: 08896acaaa25b27e7521b44bafe7c156) *)
+
+Authors of game-mgmt:
+
+* Vivien Kraus
+
+(* OASIS_STOP *)
