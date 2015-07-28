@@ -44,12 +44,12 @@ let remplacer remplacement chaine =
   traiter_morceau [] 0 false
     
 type evenement =
-  | Changement_nom of bytes (* La version échappée du nom demandé *)
-  | Nouveau_joueur of bytes
-  | Depart_joueur of bytes
-  | Nouvelle_invitation of (bytes list * bytes)
+  | Changement_nom of Bytes.t (* La version échappée du nom demandé *)
+  | Nouveau_joueur of Bytes.t
+  | Depart_joueur of Bytes.t
+  | Nouvelle_invitation of (Bytes.t list * Bytes.t)
   (* Les noms des gens (dont moi, tous uniques) x les arguments supplémentaires *)
-  | Invitation_annulee of (bytes list * bytes * bytes)
+  | Invitation_annulee of (Bytes.t list * Bytes.t * Bytes.t)
   (* L'invitation en question x arguments x le nom du type qui a refusé *)
 
 class type tjoueur_hors_jeu =
@@ -64,14 +64,14 @@ class type tjoueur_hors_jeu =
     method invitation_invalide: int list -> unit
     (* L'invitation a été jugée invalide par le serveur de jeu *)
     method invitation_refusee_par: int list -> unit
-    method invitation_acceptee: bytes -> int -> bytes array -> unit
+    method invitation_acceptee: Bytes.t -> int -> Bytes.t array -> unit
     (* Je fais maintenant partie du jeu x, en position y. Je retourne le thread initié par inviter, je me supprime de la table des joueurs hors jeu, je crée un joueur en jeu. Le tableau est celui des ids privés des adversaires. *)
     method private flux_evenements: evenement Lwt_stream.t
-    method id_prive: bytes
-    method nom_reel: bytes
-    method invitation_demandee: (bytes list * bytes) option
-    method invitation_compatible: (bytes list * bytes) -> bool
-    method inviter: bytes list * bytes -> unit Lwt.t
+    method id_prive: Bytes.t
+    method nom_reel: Bytes.t
+    method invitation_demandee: (Bytes.t list * Bytes.t) option
+    method invitation_compatible: (Bytes.t list * Bytes.t) -> bool
+    method inviter: Bytes.t list * Bytes.t -> unit Lwt.t
     (* Peut lever tout un tas d'exceptions dans le thread retourné ! Si l'invitation est réussie, une requête est envoyée au serveur de jeu. Si le serveur répond "0", alors les adversaires sortent de la table des joueurs hors jeu, annulent les invitations restantes dans la table hors jeu, disent au revoir et s'inscrivent dans la table des joueurs en jeu. Au préalable, j'annule mon invitation. Une fois qu'elle est modifiée, je regarde si elle est compatible avec celles des autres. Si oui, je notifie les autres et je regarde si c'est prêt. Si non, je la refuse tout de suite. *)
     method annuler_invitation: unit
     (* Si j'ai une invitation, tous ceux qui la partagent recevront Non_invitable *)
@@ -87,14 +87,14 @@ class type tjoueur_en_jeu =
     method deconnecter: unit Lwt.t
     method deconnecter_plus_tard: unit
     (* Repousse la mort *)
-    method id_prive: bytes
-    method nom_reel: bytes
-    method id_partie: bytes
+    method id_prive: Bytes.t
+    method nom_reel: Bytes.t
+    method id_partie: Bytes.t
     method adversaires: tjoueur_en_jeu array (* Pour les remplacements dans la réponse *)
     method mon_numero: int
-    method traiter_requete_jeu: bytes Lwt_stream.t -> bytes Lwt_stream.t
+    method traiter_requete_jeu: Bytes.t Lwt_stream.t -> Bytes.t Lwt_stream.t
     (* Si le premier mot n'est pas "jeu", le flux est vide. Sinon, transmet les 2 premières lignes ("jeu" et le nom de la commande), change la 3ème ligne (quelle qu'elle soit, elle devient id_partie^"."^mon_numero). On ne vérifie pas ici si l'ID privé correspond bien à celui de ce joueur. *)
-    method traiter_reponse: bytes Lwt_stream.t -> bytes Lwt_stream.t
+    method traiter_reponse: Bytes.t Lwt_stream.t -> Bytes.t Lwt_stream.t
     (* Remplace tous les nombres entre dollars $3$ par la chaine adversaires.(...) correspondante *)
   end
 
@@ -107,7 +107,7 @@ exception Doublon_invite (* J'ai invité plusieurs fois le même type *)
 exception Non_invitable of int list (* La place des gens non invitables *)
 exception Pas_de_message
 exception Erreur_jeu of int list
-exception Erreur_interne of bytes
+exception Erreur_interne of Bytes.t
 
 let joueurs_en_jeu = Hashtbl.create 1
 
@@ -243,7 +243,7 @@ let creer_id_prive () =
   trouver_id_prive ()
   
 class joueur_hors_jeu
-    (creer_partie: int -> bytes -> (int list * bytes) Lwt.t)
+    (creer_partie: int -> Bytes.t -> (int list * Bytes.t) Lwt.t)
     (* nombre de joueurs -> paramètre -> code, nom de la partie *)
     detruire_partie
     nom_reel : tjoueur_hors_jeu =
@@ -364,7 +364,7 @@ class joueur_hors_jeu
       let nouveau_joueur =
         new joueur_en_jeu detruire_partie id_prive nom_reel id_jeu numero ids_adversaires in
       ignore nouveau_joueur
-    method invitation_compatible (autre_invitation: bytes list * bytes) =
+    method invitation_compatible (autre_invitation: Bytes.t list * Bytes.t) =
       invitation_demandee = None
       || invitation_demandee = Some autre_invitation
     method invitation_invalide code =

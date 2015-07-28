@@ -1,6 +1,6 @@
 type connexion =
   | Non_specifiee
-  | Unix of bytes
+  | Unix of Bytes.t
   | Inet of Unix.inet_addr
   | Inet4_any
   | Inet6_any

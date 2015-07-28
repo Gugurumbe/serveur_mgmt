@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 91bdb9bcb379687bfc784db70837232c) *)
+(* DO NOT EDIT (digest: 4efb4b4b7fba0b0d78838562d8782e42) *)
 
 This is the INSTALL file for the game-mgmt distribution.
 
@@ -13,6 +13,7 @@ In order to compile this package, you will need:
                                                 * ocaml
                                                 * findlib
                                                 * lwt
+                                                * bytes
 
 Installing
 ==========

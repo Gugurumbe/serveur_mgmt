@@ -124,7 +124,7 @@ let recapituler id_prive =
 
 type resultat_traitement =
   | Erreur of int list
-  | Succes of bytes Lwt_stream.t
+  | Succes of Bytes.t Lwt_stream.t
 
 let traiter_requete_jeu id_prive req =
   try

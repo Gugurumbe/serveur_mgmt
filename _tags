@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: eac31fb6f7dc57c3f82d25a9b8e4a938)
+# DO NOT EDIT (digest: 702383c27095ab4ab77923789ab49e54)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -19,20 +19,24 @@ true: annot, bin_annot
 # Library libmgmt
 "serveur_mgmt/libmgmt.cmxs": use_libmgmt
 # Executable serveur_jeu
+<serveur_jeu/serveur_jeu.{native,byte}>: pkg_bytes
 <serveur_jeu/serveur_jeu.{native,byte}>: pkg_lwt
 <serveur_jeu/serveur_jeu.{native,byte}>: pkg_lwt.unix
 <serveur_jeu/serveur_jeu.{native,byte}>: pkg_unix
 <serveur_jeu/serveur_jeu.{native,byte}>: use_libjeu
+<serveur_jeu/*.ml{,i,y}>: pkg_bytes
 <serveur_jeu/*.ml{,i,y}>: pkg_lwt
 <serveur_jeu/*.ml{,i,y}>: pkg_lwt.unix
 <serveur_jeu/*.ml{,i,y}>: pkg_unix
 <serveur_jeu/*.ml{,i,y}>: use_libjeu
 # Executable serveur_mgmt
+<serveur_mgmt/serveur_mgmt.{native,byte}>: pkg_bytes
 <serveur_mgmt/serveur_mgmt.{native,byte}>: pkg_lwt
 <serveur_mgmt/serveur_mgmt.{native,byte}>: pkg_lwt.unix
 <serveur_mgmt/serveur_mgmt.{native,byte}>: pkg_unix
 <serveur_mgmt/serveur_mgmt.{native,byte}>: use_libjeu
 <serveur_mgmt/serveur_mgmt.{native,byte}>: use_libmgmt
+<serveur_mgmt/*.ml{,i,y}>: pkg_bytes
 <serveur_mgmt/*.ml{,i,y}>: pkg_lwt
 <serveur_mgmt/*.ml{,i,y}>: pkg_lwt.unix
 <serveur_mgmt/*.ml{,i,y}>: pkg_unix

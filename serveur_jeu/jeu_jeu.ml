@@ -40,7 +40,7 @@ exception Coup_hors_zone of (int * int)
 exception Coup_deja_pris of (int * int) (* x - y *)
 exception Pas_ton_tour of (int * int) (* Mon numéro - celui dont c'est réellement le tour *)
 exception Pas_de_message (* quand je cherche à faire un pop *)
-exception Erreur_interne of bytes
+exception Erreur_interne of Bytes.t
 
 let creer_jeu compteur nombre_joueurs taille_plateau_w taille_plateau_h taille_gagnante =
   let () = if nombre_joueurs < 2

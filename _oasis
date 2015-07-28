@@ -17,7 +17,8 @@ Library libjeu
     lwt,
     unix,
     lwt.unix,
-    libjeu
+    libjeu,
+    bytes
 
 Library libmgmt
   Path: serveur_mgmt
@@ -30,7 +31,8 @@ Library libmgmt
     lwt,
     unix,
     lwt.unix,
-    libjeu
+    libjeu,
+    bytes
 
 Executable serveur_jeu
   Path:
@@ -45,7 +47,8 @@ Executable serveur_jeu
     lwt,
     unix,
     lwt.unix,
-    libjeu
+    libjeu,
+    bytes
 
 Executable serveur_mgmt
   Path:
@@ -60,5 +63,6 @@ Executable serveur_mgmt
     lwt,
     unix,
     lwt.unix,
-    libmgmt
+    libmgmt,
+    bytes
   
