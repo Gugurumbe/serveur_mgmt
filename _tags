@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 702383c27095ab4ab77923789ab49e54)
+# DO NOT EDIT (digest: 7d46a13f8718ca15a5796731eaa1460b)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -15,31 +15,41 @@ true: annot, bin_annot
 "_darcs": -traverse
 "_darcs": not_hygienic
 # Library libjeu
-"serveur_jeu/libjeu.cmxs": use_libjeu
+"libjeu/libjeu.cmxs": use_libjeu
+<libjeu/*.ml{,i,y}>: package(bytes)
+<libjeu/*.ml{,i,y}>: package(lwt)
+<libjeu/*.ml{,i,y}>: package(lwt.unix)
+<libjeu/*.ml{,i,y}>: package(unix)
+<libjeu/*.ml{,i,y}>: use_libjeu
 # Library libmgmt
-"serveur_mgmt/libmgmt.cmxs": use_libmgmt
+"libmgmt/libmgmt.cmxs": use_libmgmt
+<libmgmt/*.ml{,i,y}>: package(bytes)
+<libmgmt/*.ml{,i,y}>: package(lwt)
+<libmgmt/*.ml{,i,y}>: package(lwt.unix)
+<libmgmt/*.ml{,i,y}>: package(unix)
+<libmgmt/*.ml{,i,y}>: use_libjeu
 # Executable serveur_jeu
-<serveur_jeu/serveur_jeu.{native,byte}>: pkg_bytes
-<serveur_jeu/serveur_jeu.{native,byte}>: pkg_lwt
-<serveur_jeu/serveur_jeu.{native,byte}>: pkg_lwt.unix
-<serveur_jeu/serveur_jeu.{native,byte}>: pkg_unix
+<serveur_jeu/serveur_jeu.{native,byte}>: package(bytes)
+<serveur_jeu/serveur_jeu.{native,byte}>: package(lwt)
+<serveur_jeu/serveur_jeu.{native,byte}>: package(lwt.unix)
+<serveur_jeu/serveur_jeu.{native,byte}>: package(unix)
 <serveur_jeu/serveur_jeu.{native,byte}>: use_libjeu
-<serveur_jeu/*.ml{,i,y}>: pkg_bytes
-<serveur_jeu/*.ml{,i,y}>: pkg_lwt
-<serveur_jeu/*.ml{,i,y}>: pkg_lwt.unix
-<serveur_jeu/*.ml{,i,y}>: pkg_unix
+<serveur_jeu/*.ml{,i,y}>: package(bytes)
+<serveur_jeu/*.ml{,i,y}>: package(lwt)
+<serveur_jeu/*.ml{,i,y}>: package(lwt.unix)
+<serveur_jeu/*.ml{,i,y}>: package(unix)
 <serveur_jeu/*.ml{,i,y}>: use_libjeu
 # Executable serveur_mgmt
-<serveur_mgmt/serveur_mgmt.{native,byte}>: pkg_bytes
-<serveur_mgmt/serveur_mgmt.{native,byte}>: pkg_lwt
-<serveur_mgmt/serveur_mgmt.{native,byte}>: pkg_lwt.unix
-<serveur_mgmt/serveur_mgmt.{native,byte}>: pkg_unix
+<serveur_mgmt/serveur_mgmt.{native,byte}>: package(bytes)
+<serveur_mgmt/serveur_mgmt.{native,byte}>: package(lwt)
+<serveur_mgmt/serveur_mgmt.{native,byte}>: package(lwt.unix)
+<serveur_mgmt/serveur_mgmt.{native,byte}>: package(unix)
 <serveur_mgmt/serveur_mgmt.{native,byte}>: use_libjeu
 <serveur_mgmt/serveur_mgmt.{native,byte}>: use_libmgmt
-<serveur_mgmt/*.ml{,i,y}>: pkg_bytes
-<serveur_mgmt/*.ml{,i,y}>: pkg_lwt
-<serveur_mgmt/*.ml{,i,y}>: pkg_lwt.unix
-<serveur_mgmt/*.ml{,i,y}>: pkg_unix
+<serveur_mgmt/*.ml{,i,y}>: package(bytes)
+<serveur_mgmt/*.ml{,i,y}>: package(lwt)
+<serveur_mgmt/*.ml{,i,y}>: package(lwt.unix)
+<serveur_mgmt/*.ml{,i,y}>: package(unix)
 <serveur_mgmt/*.ml{,i,y}>: use_libjeu
 <serveur_mgmt/*.ml{,i,y}>: use_libmgmt
 # OASIS_STOP

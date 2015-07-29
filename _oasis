@@ -4,11 +4,11 @@ Version:     0.0
 Synopsis:    A front-end to multiplayer games
 Authors:     Vivien Kraus
 License:     LGPL-2.1 with OCaml linking exception
-Plugins:     META (0.4), StdFiles (0.4), DevFiles (0.4)
+Plugins:     META (0.4), StdFiles (0.4)
 OCamlVersion: >= 3.12.1
 
 Library libjeu
-  Path: serveur_jeu
+  Path: libjeu
   BuildTools: ocamlbuild
   InternalModules:
     Jeu_jeu, Async_jeu
@@ -22,7 +22,7 @@ Library libjeu
     bytes
 
 Library libmgmt
-  Path: serveur_mgmt
+  Path: libmgmt
   BuildTools: ocamlbuild
   InternalModules:
     Async_mgmt
