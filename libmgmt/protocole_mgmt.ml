@@ -8,10 +8,12 @@ let ecrire_evenement = function
   | Depart_joueur gus ->
     Printf.sprintf "depart_joueur: %s" gus
   | Nouvelle_invitation (joueurs, parametre) ->
-    Printf.sprintf "invitation: %s,%s"
+    Printf.sprintf "invitation: %d,%s,%s"
+      (List.length joueurs)
       (Bytes.concat "," joueurs) parametre
   | Invitation_annulee (joueurs, parametre, annulant) ->
-    Printf.sprintf "invitation_annulee: %s,%s,%s"
+    Printf.sprintf "invitation_annulee: %d,%s,%s,%s"
+      (List.length joueurs)
       (Bytes.concat "," joueurs) annulant parametre
 
 let ecrire_code liste =
