@@ -1,3 +1,7 @@
+S libjeu/
+B _build/libjeu/
+S libmgmt/
+B _build/libmgmt/
 S serveur_jeu/
 B _build/serveur_jeu/
 S serveur_mgmt/
