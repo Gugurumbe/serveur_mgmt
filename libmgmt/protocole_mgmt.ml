@@ -12,7 +12,7 @@ let ecrire_evenement = function
       (Bytes.concat "," joueurs) parametre
   | Invitation_annulee (joueurs, parametre, annulant) ->
     Printf.sprintf "invitation_annulee: %s,%s,%s"
-      (Bytes.concat "," joueurs) parametre annulant
+      (Bytes.concat "," joueurs) annulant parametre
 
 let ecrire_code liste =
   let chaines = List.map (string_of_int) liste in
