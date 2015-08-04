@@ -38,9 +38,12 @@ let nouveau_joueur creer_partie detruire_partie nom =
 let peek_msg id_prive =
   try
     let j = trouver_hors_jeu id_prive in
+    let () = j#deconnecter_plus_tard in
     Lwt.try_bind
       (fun () -> j#peek)
-      (fun ev -> Lwt.return ([0], Some ev))
+      (fun ev -> 
+         let () = j#deconnecter_plus_tard in
+         Lwt.return ([0], Some ev))
       (fun exc ->
          let code = code_exception exc in
          Lwt.return (code, None))
@@ -51,9 +54,12 @@ let peek_msg id_prive =
 let pop_msg id_prive =
   try
     let j = trouver_hors_jeu id_prive in
+    let () = j#deconnecter_plus_tard in
     Lwt.try_bind
       (fun () -> j#pop)
-      (fun () -> Lwt.return [0])
+      (fun () ->
+         let () = j#deconnecter_plus_tard in
+         Lwt.return [0])
       (fun exc ->
          let code = code_exception exc in
          Lwt.return code)
@@ -64,9 +70,12 @@ let pop_msg id_prive =
 let inviter id_prive joueurs parametre =
   try
     let j = trouver_hors_jeu id_prive in
+    let () = j#deconnecter_plus_tard in
     Lwt.try_bind
       (fun () -> j#inviter (joueurs, parametre))
-      (fun () -> Lwt.return [0])
+      (fun () ->
+         let () = j#deconnecter_plus_tard in
+         Lwt.return [0])
       (fun exc ->
          let code = code_exception exc in
          Lwt.return code)
@@ -77,6 +86,7 @@ let inviter id_prive joueurs parametre =
 let annuler_invitation id_prive =
   try
     let j = trouver_hors_jeu id_prive in
+    let () = j#deconnecter_plus_tard in
     j#annuler_invitation
   with exc ->
     ()
@@ -113,6 +123,7 @@ let deconnecter id_prive =
 let recapituler id_prive =
   try
     let j = trouver_hors_jeu id_prive in
+    let () = j#deconnecter_plus_tard in
     let flux = j#recapituler in
     Lwt.return ([0], flux)
   with exc ->
@@ -129,6 +140,7 @@ type resultat_traitement =
 let traiter_requete_jeu id_prive req =
   try
     let j = trouver_en_jeu id_prive in
+    let () = j#deconnecter_plus_tard in
     let flux = j#traiter_requete_jeu req in
     Succes flux
   with exc ->
@@ -137,6 +149,7 @@ let traiter_requete_jeu id_prive req =
 let traiter_reponse_jeu id_prive rep =
   try
     let j = trouver_en_jeu id_prive in
+    let () = j#deconnecter_plus_tard in
     let flux = j#traiter_reponse rep in
     Succes flux
   with exc ->
